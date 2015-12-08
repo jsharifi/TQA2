@@ -1,0 +1,38 @@
+package com.demoqa.pageobjects;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+
+public class BasePage {
+	protected WebDriver driver;
+	private By registrationButton = By.linkText("Registration");
+	
+	public BasePage(WebDriver driver) {
+		this.driver = driver;
+	}
+	
+	public RegistrationPage clickRegistrationBtn() {
+		System.out.println("clicking on registration button");
+		WebElement registrationBtnElement=driver.findElement(registrationButton);
+		if(registrationBtnElement.isDisplayed()||registrationBtnElement.isEnabled())
+			registrationBtnElement.click();
+		else System.out.println("Element not found");
+		return new RegistrationPage(driver);
+	}
+	
+	public void clickImagesLink() {
+		//It should have a logic to click on images link
+		//And it should navigate to google images page
+	}
+	
+	public String getPageTitle(){
+		String title = driver.getTitle();
+		return title;
+	}
+	
+	public boolean verifyBasePageTitle() {
+		String expectedPageTitle="Google";
+		return getPageTitle().contains(expectedPageTitle);
+	}
+}
